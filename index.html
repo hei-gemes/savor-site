@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savor — Make your identity</title>
+<meta name="description" content="Savor（サボア）— 天然石と真鍮のアクセサリー、タロットリーディング。Make your identity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0d0e;
+  --rose:#e8aa98;
+  --rose-soft:#f4d4c6;
+  --champagne:#ecd8b8;
+  --mauve:#c2a0d0;
+  --text:#f4edf2;
+  --text-muted:rgba(244,237,242,.7);
+  --text-faint:rgba(244,237,242,.42);
+  --line:rgba(255,190,170,.26);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Shippori Mincho',serif;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+#bg{position:fixed;inset:0;z-index:0;display:block}
+.bg-tint{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.4s ease,background 1.4s ease;mix-blend-mode:screen}
+.content{position:relative;z-index:2}
+
+/* Header */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 40px;
+  background:rgba(16,15,16,0);
+  backdrop-filter:blur(0px);
+  transition:background .5s ease,backdrop-filter .5s ease,padding .5s ease;
+}
+header.scrolled{
+  background:rgba(16,15,16,.74);
+  backdrop-filter:blur(14px);
+  padding:16px 40px;
+  border-bottom:.5px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .5s ease}
+header.scrolled .brand{opacity:1}
+.brand-mark{height:38px;width:auto;display:block}
+.brand-logo{height:40px;width:auto;display:block}
+@media(max-width:640px){.brand-mark{height:32px}.brand-logo{height:34px}}
+nav{display:flex;gap:34px}
+nav a{
+  font-size:15px;color:var(--text-muted);text-decoration:none;
+  letter-spacing:.1em;opacity:0;
+  transition:color .3s ease,opacity .5s ease;
+}
+header.scrolled nav a{opacity:1}
+nav a:hover{color:var(--rose)}
+.header-right{display:flex;align-items:center;gap:34px}
+.header-cta{
+  font-family:'Shippori Mincho',serif;font-size:14.5px;letter-spacing:.12em;
+  color:var(--rose-soft);text-decoration:none;white-space:nowrap;
+  padding:10px 24px;border:.5px solid var(--rose);border-radius:30px;
+  background:rgba(255,190,170,.08);transition:all .4s ease;
+}
+.header-cta:hover{background:rgba(255,190,170,.2);transform:translateY(-2px)}
+@media(max-width:640px){nav{display:none} header,header.scrolled{padding:16px 24px} .header-cta{font-size:13px;padding:9px 20px}}
+
+/* Hero */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:0 24px 96px;position:relative;
+  background:linear-gradient(to bottom, rgba(14,13,14,0) 56%, #0e0d0e 100%), linear-gradient(to right, #0e0d0e 0%, rgba(14,13,14,0) 12%, rgba(14,13,14,0) 88%, #0e0d0e 100%), url('images/hero-bg.png') center/cover no-repeat;
+  background-color:#0e0d0e;
+}
+.hero-logo-img{
+  width:clamp(200px,38vw,360px);height:auto;display:block;
+  filter:drop-shadow(0 0 70px rgba(255,200,180,.28));
+  opacity:0;transform:translateY(30px) scale(.96);
+  animation:rise 1.6s cubic-bezier(.2,.8,.2,1) .3s forwards;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,17px);color:var(--text-muted);letter-spacing:.24em;
+  margin-top:14px;opacity:0;
+  animation:fade 1.6s ease 1s forwards;
+}
+.scroll-cue{
+  position:absolute;bottom:46px;left:50%;transform:translateX(-50%);
+  font-size:12px;color:var(--text-faint);letter-spacing:.2em;
+  opacity:0;animation:fade 1.6s ease 1.4s forwards;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.scroll-cue .line{width:1px;height:42px;background:linear-gradient(var(--rose),transparent);animation:cueMove 2.4s ease-in-out infinite}
+@keyframes cueMove{0%,100%{transform:scaleY(.5);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+@keyframes fade{to{opacity:1}}
+
+/* Sections */
+section{padding:150px 32px;max-width:1080px;margin:0 auto}
+.label{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:19px;color:var(--rose);letter-spacing:.22em;
+  text-align:center;margin-bottom:18px;
+}
+.heading{
+  font-size:clamp(32px,7vw,52px);font-weight:500;
+  text-align:center;letter-spacing:.1em;margin-bottom:64px;line-height:1.4;
+}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.1s ease,transform 1.1s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* Concept */
+.concept-poem{text-align:center}
+.concept-poem p{font-size:clamp(21px,3.6vw,32px);line-height:2.5;letter-spacing:.12em;color:var(--text);font-weight:400}
+.concept-poem p+p{margin-top:48px}
+.br-sp{display:none}
+@media(max-width:640px){.br-sp{display:block}}
+
+/* Stones */
+.stone-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:24px;margin-top:24px;
+}
+@media(max-width:780px){.stone-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:781px) and (max-width:980px){.stone-grid{grid-template-columns:repeat(5,1fr);gap:14px}}
+.stone{
+  cursor:pointer;text-align:center;padding:28px 10px;
+  border:.5px solid var(--line);border-radius:20px;
+  background:rgba(255,255,255,.018);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .5s ease,background .5s ease;
+}
+.stone:hover{transform:translateY(-8px);border-color:var(--rose);background:rgba(255,190,170,.07)}
+.stone-orb{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 18px;
+  overflow:hidden;
+  box-shadow:0 0 32px -6px var(--orb-glow,rgba(255,190,170,.5));
+}
+.stone-orb img{width:100%;height:100%;object-fit:cover;display:block}
+.stone-name{font-size:15.5px;color:var(--text);letter-spacing:.05em;line-height:1.6}
+
+/* Stone Modal */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(14,6,26,.72);backdrop-filter:blur(12px);
+  opacity:0;pointer-events:none;transition:opacity .5s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-card{
+  max-width:600px;width:100%;
+  border:.5px solid var(--line);border-radius:28px;
+  padding:64px 44px;text-align:center;position:relative;
+  background:rgba(26,23,24,.93);
+  transform:scale(.92) translateY(24px);transition:transform .55s cubic-bezier(.2,.8,.2,1);
+  max-height:88vh;overflow-y:auto;
+}
+.modal-overlay.open .modal-card{transform:scale(1) translateY(0)}
+.modal-close{
+  position:absolute;top:22px;right:28px;
+  background:none;border:none;color:var(--text-muted);
+  font-size:34px;cursor:pointer;line-height:1;transition:color .3s ease;z-index:3;
+}
+.modal-close:hover{color:var(--rose)}
+.detail-orb{width:120px;height:120px;border-radius:50%;margin:0 auto 28px;overflow:hidden;box-shadow:0 0 48px -8px var(--orb-glow,rgba(255,190,170,.6))}
+.detail-orb img{width:100%;height:100%;object-fit:cover;display:block}
+.detail-name{font-size:28px;letter-spacing:.12em;color:var(--rose-soft);margin-bottom:10px}
+.detail-key{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--text-faint);letter-spacing:.16em;margin-bottom:32px}
+.detail-text{font-size:17.5px;color:var(--text-muted);line-height:2.4;letter-spacing:.05em;max-width:540px;margin:0 auto;text-align:left}
+.detail-text p+p{margin-top:22px}
+
+/* Tarot */
+.tarot-intro{text-align:center;font-size:clamp(16px,2.4vw,20px);color:var(--text-muted);margin-bottom:64px;line-height:2.3}
+.tarot-cards{display:flex;justify-content:center;gap:clamp(20px,5vw,56px);flex-wrap:wrap;perspective:1600px}
+.tcard{
+  width:clamp(130px,24vw,200px);aspect-ratio:13/21;cursor:pointer;position:relative;
+  transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,.2,.2,1),opacity .6s ease;
+}
+.tcard:hover:not(.flipped):not(.dim){transform:translateY(-10px)}
+.tcard.flipped{transform:rotateY(180deg)}
+.tcard.dim{opacity:.22;pointer-events:none}
+.tface{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tback{background:#1b1819}
+.tback img{width:100%;height:100%;object-fit:cover;display:block}
+.tfront{
+  transform:rotateY(180deg);border:1px solid var(--rose);
+  background:#1b1819;padding:0;
+}
+.tfront img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.tfront.reversed img{transform:rotate(180deg)}
+
+.tarot-done{text-align:center;color:var(--text-muted);font-size:clamp(15px,2.2vw,18px);letter-spacing:.08em;line-height:2.4}
+.tarot-done .invite-wrap{margin-top:32px}
+.tarot-invite{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border:.5px solid var(--line);border-radius:14px;color:var(--rose-soft);text-decoration:none;font-size:15px;letter-spacing:.08em;background:rgba(255,190,170,.06);transition:all .4s ease}
+.tarot-invite:hover{border-color:var(--rose);background:rgba(255,190,170,.12);transform:translateY(-3px)}
+
+/* Tarot Modal */
+.tmodal-overlay{
+  position:fixed;inset:0;z-index:110;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(14,6,26,.78);backdrop-filter:blur(14px);
+  opacity:0;pointer-events:none;transition:opacity .6s ease;
+}
+.tmodal-overlay.open{opacity:1;pointer-events:auto}
+.tmodal-card{
+  max-width:440px;width:100%;
+  border:.5px solid var(--line);border-radius:28px;
+  padding:48px 36px 44px;text-align:center;position:relative;
+  background:rgba(26,23,24,.94);
+  transform:scale(.9) translateY(28px);transition:transform .6s cubic-bezier(.2,.8,.2,1);
+  max-height:92vh;overflow-y:auto;
+}
+.tmodal-overlay.open .tmodal-card{transform:scale(1) translateY(0)}
+.tmodal-image{
+  width:min(220px,58vw);aspect-ratio:13/21;margin:0 auto 30px;
+  border-radius:12px;overflow:hidden;
+  border:1px solid var(--rose);
+  box-shadow:0 18px 50px -16px rgba(232,170,152,.5);
+}
+.tmodal-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.tmodal-image.reversed img{transform:rotate(180deg)}
+.tmodal-pos{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--text-faint);letter-spacing:.18em;margin-bottom:8px}
+.tmodal-name{font-size:26px;letter-spacing:.12em;color:var(--rose-soft);margin-bottom:24px}
+.tmodal-msg{font-size:17px;color:var(--text-muted);line-height:2.3;letter-spacing:.04em;max-width:340px;margin:0 auto 30px}
+.tmodal-invite{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border:.5px solid var(--line);border-radius:14px;color:var(--rose-soft);text-decoration:none;font-size:14.5px;letter-spacing:.08em;background:rgba(255,190,170,.06);transition:all .4s ease}
+.tmodal-invite:hover{border-color:var(--rose);background:rgba(255,190,170,.12);transform:translateY(-3px)}
+
+/* Links */
+.links{display:flex;flex-direction:column;gap:18px;max-width:480px;margin:0 auto}
+.link-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:24px;border:.5px solid var(--line);border-radius:16px;
+  color:var(--text);text-decoration:none;font-size:16.5px;letter-spacing:.08em;
+  background:rgba(255,255,255,.02);transition:all .4s ease;
+}
+.link-btn:hover{border-color:var(--rose);background:rgba(255,190,170,.08);transform:translateY(-4px)}
+
+/* Footer */
+footer{text-align:center;padding:80px 24px 64px;border-top:.5px solid var(--line);margin-top:60px}
+.footer-mark{height:64px;width:auto;display:block;margin:0 auto 22px;opacity:.85}
+.footer-logo-img{width:64px;height:auto;display:block;margin:0 auto 26px}
+.concept-mark{display:block;width:clamp(96px,18vw,140px);height:auto;margin:0 auto 40px;opacity:.9}
+.footer-copy{font-size:12.5px;color:var(--text-faint);letter-spacing:.1em}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="bg-tint" id="tint"></div>
+
+<div class="content">
+<header id="header">
+  <div class="brand">
+    <img class="brand-mark" src="images/mark.png" alt="">
+    <img class="brand-logo" src="images/logo-circle.png" alt="Savor">
+  </div>
+  <div class="header-right">
+    <nav>
+      <a href="#concept">Concept</a>
+      <a href="#stones">Stones</a>
+      <a href="#tarot">Tarot</a>
+      <a href="#links">Links</a>
+    </nav>
+    <a href="#links" class="header-cta">繋がる</a>
+  </div>
+</header>
+
+<div class="hero">
+  <img class="hero-logo-img" src="images/logo-circle.png" alt="Savor — Make your identity">
+  <div class="hero-sub">天然石が紡ぐ、あなただけの物語</div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+</div>
+
+<section id="concept" class="reveal">
+  <div class="label">Concept</div>
+  <img class="concept-mark" src="images/mark.png" alt="">
+  <div class="concept-poem">
+    <p>天然石は持ち主に力を与え<br>真鍮の経年変化は<br>持ち主と共に育つ変容の証</p>
+    <p>買って終わりではなく<br>身につけてから始まる<br>持ち主とアクセサリーの<br class="br-sp">ストーリー</p>
+  </div>
+</section>
+
+<section id="stones" class="reveal">
+  <div class="label">Natural Stones</div>
+  <div class="heading">石を選ぶ</div>
+  <div class="stone-grid" id="stoneGrid"></div>
+</section>
+
+<section id="tarot" class="reveal">
+  <div class="label">Tarot</div>
+  <div class="heading">今日のあなたへ</div>
+  <div class="tarot-intro" id="tarotIntro">3枚のカードから、直感で1枚を選んでください。<br>今のあなたに必要なメッセージが届きます。</div>
+  <div class="tarot-cards" id="tarotCards"></div>
+</section>
+
+<section id="links" class="reveal">
+  <div class="label">Links</div>
+  <div class="heading">Savorと繋がる</div>
+  <div class="links">
+    <a class="link-btn" href="https://www.instagram.com/savor2005" target="_blank">アクセサリー Instagram</a>
+    <a class="link-btn" href="https://www.instagram.com/savor_fortuneteller" target="_blank">占い Instagram</a>
+    <a class="link-btn" href="https://lin.ee/pyRhiqs" target="_blank">ご予約・お問い合わせ（LINE）</a>
+  </div>
+</section>
+
+<footer>
+  <img class="footer-mark" src="images/mark.png" alt="">
+  <img class="footer-logo-img" src="images/logo-circle.png" alt="Savor">
+  <div class="footer-copy">© 2025 Savor. All rights reserved.</div>
+</footer>
+</div>
+
+<!-- Stone Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="detail-orb" id="dOrb"><img id="dImg" alt=""></div>
+    <div class="detail-name" id="dName"></div>
+    <div class="detail-key" id="dKey"></div>
+    <div class="detail-text" id="dText"></div>
+  </div>
+</div>
+
+<!-- Tarot Modal -->
+<div class="tmodal-overlay" id="tmodal">
+  <div class="tmodal-card">
+    <button class="modal-close" id="tmodalClose">&times;</button>
+    <div class="tmodal-image" id="tmodalImage"><img id="tmodalImg" alt=""></div>
+    <div class="tmodal-pos" id="tmodalPos"></div>
+    <div class="tmodal-name" id="tmodalName"></div>
+    <div class="tmodal-msg" id="tmodalMsg"></div>
+    <a class="tmodal-invite" href="https://lin.ee/pyRhiqs" target="_blank">もっと詳しく占いたい方は、Savorの占いへ →</a>
+  </div>
+</div>
+
+<script>
+/* ---------- Stone data ---------- */
+var stones=[
+  {name:'ハーキマーダイヤモンド',img:'images/stones/herkimer-diamond.png',key:'Purity & Amplify',glow:'rgba(220,228,240,.6)',tint:'#d8dde5',
+   text:['ニューヨーク州ハーキマー郡の地層で自然に生まれた、天然のダブルターミネーテッドクォーツ。ダイヤモンドに匹敵する透明度と輝きから、その名がつけられました。','エネルギーを純化・増幅する力を持つと言われ、意識を澄み渡らせてくれます。曇りのない本来の自分を映し出す、鏡のような石です。']},
+  {name:'ルチルクオーツ',img:'images/stones/rutilated-quartz.png',key:'Wealth & Action',glow:'rgba(212,175,55,.6)',tint:'#d4af37',
+   text:['水晶の内部に、金・銀・赤の細い針状鉱物（ルチル）が絡み合う稀少な石。まるで光の糸を閉じ込めたような、独特の美しさを持ちます。','意志と行動力を高め、目標への道筋を照らすと言われています。望む未来へ迷わず進むための、金の羅針盤のような存在です。']},
+  {name:'モスアゲート',img:'images/stones/moss-agate.png',key:'Growth & Healing',glow:'rgba(74,124,89,.55)',tint:'#4a7c59',
+   text:['石の内部に苔や草木のような模様が浮かぶ、自然を閉じ込めたような石。緑の命が息づく、世界にひとつの風景を持ちます。','大地のエネルギーを宿し、成長と癒しをもたらすと言われています。あなたのペースで、自然体のまま豊かに育っていけるよう、静かに支えてくれます。']},
+  {name:'オパール',img:'images/stones/opal.png',key:'Creation & Hope',glow:'rgba(220,200,240,.6)',tint:'#e0c8e8',
+   text:['光を受けるたびに虹のような遊色が広がる、神秘の宝石。その変幻する輝きは古来より希望と創造の象徴とされ、人々を魅了し続けてきました。','感性と創造力を高め、秘めた才能を引き出すと言われています。あなたの内側に宿る、七色の可能性を呼び覚ます石です。']},
+  {name:'デンドリティックアゲート',img:'images/stones/dendritic-agate.png',key:'Prosperity & Patience',glow:'rgba(90,107,90,.5)',tint:'#6a7b6a',
+   text:['白や透明な地の中に、枝分かれした木や草のような模様（デンドライト）が広がるアゲート。自然が石の中に描いた、唯一無二の絵画のような存在です。','豊かさと繁栄を象徴する石として知られています。根を張り、着実に積み重ねていく力を与えてくれます。じっくりと育てていく毎日を、力強く支える石です。']},
+  {name:'サンストーン',img:'images/stones/sunstone.png',key:'Vitality & Confidence',glow:'rgba(224,136,80,.6)',tint:'#e08850',
+   text:['オレンジがかった地の中にキラキラと輝く光の粒を宿す、太陽のような石。スカンジナビアでは古くから航海者の守護石として大切にされてきました。','活力と自信を与え、前向きな気持ちを引き出すと言われています。あなたの中に眠る、太陽のような輝きと温かさを世界へ解き放ってくれます。']},
+  {name:'フローライト',img:'images/stones/fluorite.png',key:'Focus & Clarity',glow:'rgba(160,200,210,.55)',tint:'#a8c0d0',
+   text:['緑・紫・青など美しい色彩のグラデーションを持つ鉱物。蛍光を放つものもあり、その透明感と色の重なりが幻想的な美しさを生み出します。','思考を整え、集中力と明晰さをもたらす石として知られています。心の雑念を静かに払い、本当に大切なことへ意識を向けるサポートをしてくれます。']},
+  {name:'ラブラドライト',img:'images/stones/labradorite.png',key:'Intuition & Change',glow:'rgba(42,74,124,.6)',tint:'#2a4a7c',
+   text:['暗い石の表面に、角度によって青・緑・金の神秘的な光彩が現れる石。この独特の輝きは「ラブラドレッセンス」と呼ばれ、見る者を魅了してやみません。','カナダのラブラドル半島が原産地。直感と変容をもたらす石として知られ、秘めた才能と可能性を引き出すと言われています。眠っていた自分の輝きを、世界へひらかせてくれます。']},
+  {name:'ムーンストーン',img:'images/stones/moonstone.png',key:'Love & Sensitivity',glow:'rgba(176,200,224,.6)',tint:'#b0c8e0',
+   text:['表面に月光のような青い揺らぎを宿す、柔らかな光を持つ石。古代インドでは月の女神の涙が固まったと信じられ、旅人を守る聖なる石とされてきました。','主な産地はスリランカ。感受性と直感を高め、変化の波をやさしく乗りこなす力を与えると言われています。闇夜の中でも道を照らす月のように、あなたを導いてくれます。']},
+  {name:'ラピスラズリ',img:'images/stones/lapis-lazuli.png',key:'Truth & Wisdom',glow:'rgba(26,74,140,.6)',tint:'#1a4a8c',
+   text:['深い青の地に、金の星屑のようなパイライトが輝く石。古代エジプトではファラオの装飾に使われ、真実と知恵の象徴として5000年以上愛されてきました。','主な産地はアフガニスタン。知性と直感を高め、真実を語る勇気をもたらすと言われています。ありのままの自分を堂々と表現するための、深い青の盾です。']}
+];
+
+var grid=document.getElementById('stoneGrid');
+stones.forEach(function(s,i){
+  var d=document.createElement('div');
+  d.className='stone';
+  d.style.setProperty('--orb-glow',s.glow);
+  d.innerHTML='<div class="stone-orb" style="--orb-glow:'+s.glow+'"><img src="'+s.img+'" alt="'+s.name+'"></div><div class="stone-name">'+s.name+'</div>';
+  d.onclick=function(){openModal(i)};
+  grid.appendChild(d);
+});
+
+/* ---------- Stone Modal ---------- */
+var modal=document.getElementById('modal');
+function openModal(i){
+  var s=stones[i];
+  document.getElementById('dOrb').style.setProperty('--orb-glow',s.glow);
+  document.getElementById('dImg').src=s.img;
+  document.getElementById('dImg').alt=s.name;
+  document.getElementById('dName').textContent=s.name;
+  document.getElementById('dKey').textContent=s.key;
+  document.getElementById('dText').innerHTML='<p>'+s.text[0]+'</p><p>'+s.text[1]+'</p>';
+  modal.classList.add('open');
+  var tint=document.getElementById('tint');
+  tint.style.background='radial-gradient(circle at 50% 40%,'+s.tint+',transparent 70%)';
+  tint.style.opacity='.18';
+}
+function closeModal(){modal.classList.remove('open');document.getElementById('tint').style.opacity='0';}
+document.getElementById('modalClose').onclick=closeModal;
+modal.onclick=function(e){if(e.target===modal)closeModal();};
+
+/* ---------- Tarot data ---------- */
+var tarot=[
+  {n:'0',nm:'愚者',img:'images/tarot/00-fool.png',u:'踏み出す一歩が、あなたらしさの始まり。何も持たない軽さで、新しい自分へ。',r:'焦りは禁物。今はまだ、準備の時間。自分の内側の声に、耳を澄ませて。'},
+  {n:'I',nm:'魔術師',img:'images/tarot/01-magician.png',u:'あなたにはすでに、必要なものが揃っている。その才能を、今こそ使う時。',r:'力を使いこなせていないだけ。磨けば輝く、あなた自身の魔法がある。'},
+  {n:'II',nm:'女教皇',img:'images/tarot/02-high-priestess.png',u:'答えはすでに、あなたの内側にある。静かに、直感を信じて。',r:'内なる声が聞こえにくくなっている。少し立ち止まって、自分と向き合う時間を。'},
+  {n:'III',nm:'女帝',img:'images/tarot/03-empress.png',u:'豊かさは、すでにあなたのそばにある。愛で育てれば、すべては花ひらく。',r:'自分を後回しにしていない？まずあなた自身を、丁寧に満たして。'},
+  {n:'IV',nm:'皇帝',img:'images/tarot/04-emperor.png',u:'自分の道を、自分の意志で切り拓いていい。あなたにはその力がある。',r:'コントロールしすぎていないか、振り返って。信頼することも、強さのひとつ。'},
+  {n:'V',nm:'教皇',img:'images/tarot/05-hierophant.png',u:'積み重ねてきたものが、あなたの礎になっている。その知恵を、誰かのために。',r:'既存の枠に縛られていない？あなた自身の答えを、見つけていい。'},
+  {n:'VI',nm:'恋人',img:'images/tarot/06-lovers.png',u:'あなたらしい選択が、あなたらしい人生をつくる。心の声に、従って。',r:'迷いがあるなら、それ自体が答えかもしれない。本当の気持ちを、確かめて。'},
+  {n:'VII',nm:'戦車',img:'images/tarot/07-chariot.png',u:'迷わず進め。あなたの意志が、未来を動かす原動力になる。',r:'力の方向がばらけているかも。まず自分の軸を、もう一度確認して。'},
+  {n:'VIII',nm:'力',img:'images/tarot/08-strength.png',u:'強さとは、優しさの奥にある。あなたの穏やかさが、最大の力。',r:'無理をしているサインかも。自分に優しくすることが、今一番の勇気。'},
+  {n:'IX',nm:'隠者',img:'images/tarot/09-hermit.png',u:'一人の時間が、あなたをもっと深くする。今は内側を照らす旅の途中。',r:'孤独になりすぎていないか。誰かの灯りを借りることも、賢さのひとつ。'},
+  {n:'X',nm:'運命の輪',img:'images/tarot/10-wheel-of-fortune.png',u:'流れが変わる予感。その波に乗る準備を、今日から始めよう。',r:'変化を恐れないで。抗うより、流れを読むことで道がひらける。'},
+  {n:'XI',nm:'正義',img:'images/tarot/11-justice.png',u:'誠実であることが、あなたの一番の武器。真実はいつも、味方になる。',r:'自分に正直になれている？偽りのない選択が、本当の自分へ続く道。'},
+  {n:'XII',nm:'吊るされた男',img:'images/tarot/12-hanged-man.png',u:'今は動かない時。違う角度から見ることで、見えてくるものがある。',r:'立ち止まりすぎているかも。そろそろ次の一歩を踏み出す時が来ている。'},
+  {n:'XIII',nm:'死神',img:'images/tarot/13-death.png',u:'終わりは始まりの扉。手放すことで、新しいあなたが生まれる。',r:'変化を拒んでいない？古いものを手放す勇気が、未来を軽くする。'},
+  {n:'XIV',nm:'節制',img:'images/tarot/14-temperance.png',u:'バランスの中に、あなたらしさが宿る。焦らず、丁寧に混ぜ合わせて。',r:'極端に振れていないか確認して。穏やかな中庸が、今のあなたに必要なもの。'},
+  {n:'XV',nm:'悪魔',img:'images/tarot/15-devil.png',u:'縛られているように見えて、鎖は案外ゆるい。気づけば、自由になれる。',r:'依存や執着を手放す時。その先に、本当のあなたが待っている。'},
+  {n:'XVI',nm:'塔',img:'images/tarot/16-tower.png',u:'崩れるのは、いらないものだけ。壊れた後に残るものが、本物の土台。',r:'変化の衝撃を和らげる方法がある。焦らず、一つずつ受け止めて。'},
+  {n:'XVII',nm:'星',img:'images/tarot/17-star.png',u:'希望は消えていない。暗い夜に輝くあの星が、あなたの道を照らしている。',r:'希望を見失いそうな時こそ、小さな光を探して。それはきっと、近くにある。'},
+  {n:'XVIII',nm:'月',img:'images/tarot/18-moon.png',u:'見えないものの中に、真実がある。感覚を研ぎ澄ませて、奥へ進んで。',r:'不安や幻に惑わされているかも。現実をしっかり見つめ直す時。'},
+  {n:'XIX',nm:'太陽',img:'images/tarot/19-sun.png',u:'今日のあなたは、輝いている。その明るさで、周りも照らして。',r:'元気が陰っているなら、まず自分を満たして。あなたの光は、必ず戻ってくる。'},
+  {n:'XX',nm:'審判',img:'images/tarot/20-judgement.png',u:'過去を受け入れ、新しい自分へと生まれ変わる時が来た。答えは、もう出ている。',r:'まだ迷っているなら、それでいい。自分を裁かないで。時間をかけて選んでいい。'},
+  {n:'XXI',nm:'世界',img:'images/tarot/21-world.png',u:'あなたはすでに、完成に近づいている。この瞬間を、全身で受け取って。',r:'あと一歩が踏み出せていない。完璧でなくていい、今のあなたで十分。'}
+];
+
+var tarotCards=document.getElementById('tarotCards');
+var tarotDone=false;
+function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+
+function doneState(){
+  tarotCards.innerHTML='';
+  document.getElementById('tarotIntro').innerHTML='<div class="tarot-done">本日のカードは、すでにお引きいただきました。<br>また明日、新しいメッセージがあなたを待っています。<div class="invite-wrap"><a class="tarot-invite" href="https://lin.ee/pyRhiqs" target="_blank">もっと詳しく占いたい方は、Savorの占いへ →</a></div></div>';
+}
+
+function initTarot(){
+  // 本番公開時には次の if 文のコメントを外して1日1回制限を有効化してください
+  // if(localStorage.getItem('savor_tarot_date')===today()){ doneState(); return; }
+  var picked=[];
+  while(picked.length<3){var r=Math.floor(Math.random()*tarot.length);if(picked.indexOf(r)<0)picked.push(r);}
+  tarotCards.innerHTML='';
+  tarotDone=false;
+  picked.forEach(function(idx){
+    var reversed=Math.random()<.5;
+    var card=document.createElement('div');
+    card.className='tcard';
+    var t=tarot[idx];
+    card.innerHTML='<div class="tface tback"><img src="images/card-back.png" alt=""></div>'+
+      '<div class="tface tfront'+(reversed?' reversed':'')+'"><img src="'+t.img+'" alt="'+t.nm+'"></div>';
+    card.onclick=function(){
+      if(tarotDone){ if(card.classList.contains('flipped')) openTarotModal(t,reversed); return; }
+      pickCard(card,t,reversed);
+    };
+    tarotCards.appendChild(card);
+  });
+}
+
+function pickCard(card,t,reversed){
+  if(tarotDone)return;tarotDone=true;
+  document.querySelectorAll('.tcard').forEach(function(c){if(c!==card)c.classList.add('dim')});
+  card.classList.add('flipped');
+  localStorage.setItem('savor_tarot_date',today());
+  setTimeout(function(){ openTarotModal(t,reversed); },1400);
+}
+
+/* ---------- Tarot Modal ---------- */
+var tmodal=document.getElementById('tmodal');
+function openTarotModal(t,reversed){
+  var imgEl=document.getElementById('tmodalImg');
+  imgEl.src=t.img;
+  imgEl.alt=t.nm;
+  var wrap=document.getElementById('tmodalImage');
+  if(reversed)wrap.classList.add('reversed');else wrap.classList.remove('reversed');
+  document.getElementById('tmodalPos').textContent=reversed?'Reversed ・ 逆位置':'Upright ・ 正位置';
+  document.getElementById('tmodalName').textContent=t.nm;
+  document.getElementById('tmodalMsg').textContent=reversed?t.r:t.u;
+  tmodal.classList.add('open');
+  var tint=document.getElementById('tint');
+  tint.style.background='radial-gradient(circle at 50% 40%,#e8aa98,transparent 70%)';
+  tint.style.opacity='.16';
+}
+function closeTarotModal(){tmodal.classList.remove('open');document.getElementById('tint').style.opacity='0';}
+document.getElementById('tmodalClose').onclick=closeTarotModal;
+tmodal.onclick=function(e){if(e.target===tmodal)closeTarotModal();};
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closeTarotModal();}});
+
+initTarot();
+
+/* ---------- Header scroll ---------- */
+var header=document.getElementById('header');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>80)header.classList.add('scrolled');else header.classList.remove('scrolled');
+});
+
+/* ---------- Reveal on scroll ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+/* ---------- Bokeh background ---------- */
+var cv=document.getElementById('bg');
+var ctx=cv.getContext('2d');
+var W,H;
+function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;initBokeh();}
+var PEACH=[255,182,158], CREAM=[250,230,200], ROSEGOLD=[235,180,156], BLUSH=[248,172,170], APRICOT=[255,200,166];
+var palette=[PEACH,CREAM,ROSEGOLD,BLUSH,APRICOT,PEACH];
+var bokeh=[];
+function initBokeh(){
+  bokeh=[];
+  var count=Math.min(30,Math.max(14,Math.floor(W/52)));
+  for(var i=0;i<count;i++){
+    var big=Math.random()<.35;
+    bokeh.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:big?(90+Math.random()*150):(20+Math.random()*56),
+      vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.18,
+      a:big?(.06+Math.random()*.08):(.16+Math.random()*.2),
+      col:palette[Math.floor(Math.random()*palette.length)],
+      core:!big,
+      pulse:Math.random()*Math.PI*2,ps:.4+Math.random()*.7
+    });
+  }
+}
+resize();window.addEventListener('resize',resize);
+var t=0;
+function draw(){
+  ctx.fillStyle='#0e0d0e';ctx.fillRect(0,0,W,H);
+  bokeh.forEach(function(b){
+    var pa=b.a*(.65+.35*Math.sin(t*b.ps+b.pulse));
+    var g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+    if(b.core){
+      g.addColorStop(0,'rgba(255,252,247,'+Math.min(.92,pa*1.5).toFixed(3)+')');
+      g.addColorStop(.28,'rgba('+b.col+','+pa.toFixed(3)+')');
+      g.addColorStop(1,'rgba('+b.col+',0)');
+    }else{
+      g.addColorStop(0,'rgba('+b.col+','+pa.toFixed(3)+')');
+      g.addColorStop(1,'rgba('+b.col+',0)');
+    }
+    ctx.fillStyle=g;
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fill();
+    b.x+=b.vx;b.y+=b.vy;
+    if(b.x<-b.r)b.x=W+b.r;if(b.x>W+b.r)b.x=-b.r;
+    if(b.y<-b.r)b.y=H+b.r;if(b.y>H+b.r)b.y=-b.r;
+  });
+  t+=.016;requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
