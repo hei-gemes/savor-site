@@ -645,8 +645,8 @@ function doneState(){
 }
 
 function initTarot(){
-  // 本番公開時には次の if 文のコメントを外して1日1回制限を有効化してください
-  // if(localStorage.getItem('savor_tarot_date')===today()){ doneState(); return; }
+  // 1日1回制限：当日すでに引いていれば「また明日」表示にする
+  if(localStorage.getItem('savor_tarot_date')===today()){ doneState(); return; }
   var picked=[];
   while(picked.length<3){var r=Math.floor(Math.random()*tarot.length);if(picked.indexOf(r)<0)picked.push(r);}
   tarotCards.innerHTML='';
