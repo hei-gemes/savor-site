@@ -573,6 +573,18 @@ searchInput.addEventListener('input',function(){
 
 /* ---------- Stone Modal ---------- */
 var modal=document.getElementById('modal');
+function fitToOneLine(el){
+  if(!el)return;
+  el.style.fontSize='';
+  el.style.whiteSpace='nowrap';
+  requestAnimationFrame(function(){
+    if(el.scrollWidth>el.clientWidth+1){
+      var cs=parseFloat(getComputedStyle(el).fontSize);
+      var newSize=Math.max(11,cs*(el.clientWidth/el.scrollWidth)*0.96);
+      el.style.fontSize=newSize+'px';
+    }
+  });
+}
 function openModal(i){
   var s=stones[i];
   var dOrb=document.getElementById('dOrb');
@@ -584,7 +596,9 @@ function openModal(i){
   dImg.src=s.img;
   dImg.alt=s.name;
   document.getElementById('dName').textContent=s.name;
-  document.getElementById('dKey').textContent=s.key;
+  var dKey=document.getElementById('dKey');
+  dKey.textContent=s.key;
+  fitToOneLine(dKey);
   document.getElementById('dText').innerHTML='<p>'+s.text+'</p>';
   modal.classList.add('open');
   var tint=document.getElementById('tint');
