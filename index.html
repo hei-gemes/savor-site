@@ -110,7 +110,7 @@ section{padding:150px 32px;max-width:1080px;margin:0 auto}
 }
 .heading{
   font-size:clamp(32px,7vw,52px);font-weight:500;
-  text-align:center;letter-spacing:.1em;margin-bottom:64px;line-height:1.4;
+  text-align:center;letter-spacing:.1em;margin-bottom:48px;line-height:1.4;
 }
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 1.1s ease,transform 1.1s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
@@ -122,7 +122,53 @@ section{padding:150px 32px;max-width:1080px;margin:0 auto}
 .br-sp{display:none}
 @media(max-width:640px){.br-sp{display:block}}
 
-/* Stones */
+/* Stones - Search */
+.stone-search{
+  max-width:480px;margin:0 auto 48px;
+  position:relative;display:flex;align-items:center;gap:14px;
+  padding:14px 26px;
+  border:.5px solid var(--line);border-radius:36px;
+  background:rgba(255,190,170,.04);
+  transition:border-color .4s ease, background .4s ease;
+}
+.stone-search:focus-within{border-color:var(--rose);background:rgba(255,190,170,.08)}
+.search-icon{
+  width:18px;height:18px;flex-shrink:0;
+  color:var(--text-faint);opacity:.7;
+}
+.stone-search input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--text);font-family:'Shippori Mincho',serif;
+  font-size:15.5px;letter-spacing:.08em;line-height:1.8;
+  width:100%;
+}
+.stone-search input::placeholder{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--text-faint);letter-spacing:.14em;font-size:15px;
+}
+.stone-count{
+  text-align:center;margin-bottom:36px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;color:var(--text-faint);letter-spacing:.18em;
+}
+.stone-more{
+  text-align:center;margin-top:48px;
+}
+.stone-more.hide{display:none}
+.stone-more button{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15.5px;letter-spacing:.18em;
+  color:var(--rose-soft);background:rgba(255,190,170,.04);
+  border:.5px solid var(--line);border-radius:30px;
+  padding:13px 36px;cursor:pointer;
+  transition:all .4s ease;
+}
+.stone-more button:hover{
+  border-color:var(--rose);background:rgba(255,190,170,.1);
+  transform:translateY(-2px);
+}
+
+/* Stones - Grid */
 .stone-grid{
   display:grid;grid-template-columns:repeat(5,1fr);
   gap:24px;margin-top:24px;
@@ -133,16 +179,25 @@ section{padding:150px 32px;max-width:1080px;margin:0 auto}
   cursor:pointer;text-align:center;padding:28px 10px;
   border:.5px solid var(--line);border-radius:20px;
   background:rgba(255,255,255,.018);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .5s ease,background .5s ease;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .5s ease,background .5s ease,opacity .4s ease;
 }
+.stone.hidden{display:none}
+.stone-grid.collapsed .stone.beyond-fold{display:none}
 .stone:hover{transform:translateY(-8px);border-color:var(--rose);background:rgba(255,190,170,.07)}
 .stone-orb{
   width:84px;height:84px;border-radius:50%;margin:0 auto 18px;
-  overflow:hidden;
+  overflow:hidden;position:relative;
   box-shadow:0 0 32px -6px var(--orb-glow,rgba(255,190,170,.5));
+  background:var(--orb-bg,transparent);
 }
 .stone-orb img{width:100%;height:100%;object-fit:cover;display:block}
 .stone-name{font-size:15.5px;color:var(--text);letter-spacing:.05em;line-height:1.6}
+.no-result{
+  display:none;text-align:center;padding:64px 24px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--text-faint);font-size:17px;letter-spacing:.14em;
+}
+.no-result.show{display:block}
 
 /* Stone Modal */
 .modal-overlay{
@@ -167,12 +222,16 @@ section{padding:150px 32px;max-width:1080px;margin:0 auto}
   font-size:34px;cursor:pointer;line-height:1;transition:color .3s ease;z-index:3;
 }
 .modal-close:hover{color:var(--rose)}
-.detail-orb{width:120px;height:120px;border-radius:50%;margin:0 auto 28px;overflow:hidden;box-shadow:0 0 48px -8px var(--orb-glow,rgba(255,190,170,.6))}
+.detail-orb{width:120px;height:120px;border-radius:50%;margin:0 auto 28px;overflow:hidden;position:relative;box-shadow:0 0 48px -8px var(--orb-glow,rgba(255,190,170,.6));background:var(--orb-bg,transparent)}
 .detail-orb img{width:100%;height:100%;object-fit:cover;display:block}
-.detail-name{font-size:28px;letter-spacing:.12em;color:var(--rose-soft);margin-bottom:10px}
-.detail-key{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--text-faint);letter-spacing:.16em;margin-bottom:32px}
+.detail-name{font-size:28px;letter-spacing:.12em;color:var(--rose-soft);margin-bottom:14px}
+.detail-key{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(15px,2.4vw,18px);
+  color:var(--rose-soft);letter-spacing:.14em;
+  margin-bottom:32px;line-height:1.8;
+}
 .detail-text{font-size:17.5px;color:var(--text-muted);line-height:2.4;letter-spacing:.05em;max-width:540px;margin:0 auto;text-align:left}
-.detail-text p+p{margin-top:22px}
 
 /* Tarot */
 .tarot-intro{text-align:center;font-size:clamp(16px,2.4vw,20px);color:var(--text-muted);margin-bottom:64px;line-height:2.3}
@@ -287,7 +346,14 @@ footer{text-align:center;padding:80px 24px 64px;border-top:.5px solid var(--line
 <section id="stones" class="reveal">
   <div class="label">Natural Stones</div>
   <div class="heading">石を選ぶ</div>
-  <div class="stone-grid" id="stoneGrid"></div>
+  <div class="stone-search">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    <input type="text" id="stoneSearch" placeholder="石の名前で探す..." autocomplete="off">
+  </div>
+  <div class="stone-count" id="stoneCount"></div>
+  <div class="stone-grid collapsed" id="stoneGrid"></div>
+  <div class="stone-more" id="stoneMore"><button id="stoneMoreBtn">もっと見る</button></div>
+  <div class="no-result" id="stoneNoResult">該当する石が見つかりませんでした</div>
 </section>
 
 <section id="tarot" class="reveal">
@@ -338,50 +404,188 @@ footer{text-align:center;padding:80px 24px 64px;border-top:.5px solid var(--line
 </div>
 
 <script>
-/* ---------- Stone data ---------- */
+/* ---------- Stone data (46 stones) ---------- */
 var stones=[
-  {name:'ハーキマーダイヤモンド',img:'images/stones/herkimer-diamond.png',key:'Purity & Amplify',glow:'rgba(220,228,240,.6)',tint:'#d8dde5',
-   text:['ニューヨーク州ハーキマー郡の地層で自然に生まれた、天然のダブルターミネーテッドクォーツ。ダイヤモンドに匹敵する透明度と輝きから、その名がつけられました。','エネルギーを純化・増幅する力を持つと言われ、意識を澄み渡らせてくれます。曇りのない本来の自分を映し出す、鏡のような石です。']},
-  {name:'ルチルクオーツ',img:'images/stones/rutilated-quartz.png',key:'Wealth & Action',glow:'rgba(212,175,55,.6)',tint:'#d4af37',
-   text:['水晶の内部に、金・銀・赤の細い針状鉱物（ルチル）が絡み合う稀少な石。まるで光の糸を閉じ込めたような、独特の美しさを持ちます。','意志と行動力を高め、目標への道筋を照らすと言われています。望む未来へ迷わず進むための、金の羅針盤のような存在です。']},
-  {name:'モスアゲート',img:'images/stones/moss-agate.png',key:'Growth & Healing',glow:'rgba(74,124,89,.55)',tint:'#4a7c59',
-   text:['石の内部に苔や草木のような模様が浮かぶ、自然を閉じ込めたような石。緑の命が息づく、世界にひとつの風景を持ちます。','大地のエネルギーを宿し、成長と癒しをもたらすと言われています。あなたのペースで、自然体のまま豊かに育っていけるよう、静かに支えてくれます。']},
-  {name:'オパール',img:'images/stones/opal.png',key:'Creation & Hope',glow:'rgba(220,200,240,.6)',tint:'#e0c8e8',
-   text:['光を受けるたびに虹のような遊色が広がる、神秘の宝石。その変幻する輝きは古来より希望と創造の象徴とされ、人々を魅了し続けてきました。','感性と創造力を高め、秘めた才能を引き出すと言われています。あなたの内側に宿る、七色の可能性を呼び覚ます石です。']},
-  {name:'デンドリティックアゲート',img:'images/stones/dendritic-agate.png',key:'Prosperity & Patience',glow:'rgba(90,107,90,.5)',tint:'#6a7b6a',
-   text:['白や透明な地の中に、枝分かれした木や草のような模様（デンドライト）が広がるアゲート。自然が石の中に描いた、唯一無二の絵画のような存在です。','豊かさと繁栄を象徴する石として知られています。根を張り、着実に積み重ねていく力を与えてくれます。じっくりと育てていく毎日を、力強く支える石です。']},
-  {name:'サンストーン',img:'images/stones/sunstone.png',key:'Vitality & Confidence',glow:'rgba(224,136,80,.6)',tint:'#e08850',
-   text:['オレンジがかった地の中にキラキラと輝く光の粒を宿す、太陽のような石。スカンジナビアでは古くから航海者の守護石として大切にされてきました。','活力と自信を与え、前向きな気持ちを引き出すと言われています。あなたの中に眠る、太陽のような輝きと温かさを世界へ解き放ってくれます。']},
-  {name:'フローライト',img:'images/stones/fluorite.png',key:'Focus & Clarity',glow:'rgba(160,200,210,.55)',tint:'#a8c0d0',
-   text:['緑・紫・青など美しい色彩のグラデーションを持つ鉱物。蛍光を放つものもあり、その透明感と色の重なりが幻想的な美しさを生み出します。','思考を整え、集中力と明晰さをもたらす石として知られています。心の雑念を静かに払い、本当に大切なことへ意識を向けるサポートをしてくれます。']},
-  {name:'ラブラドライト',img:'images/stones/labradorite.png',key:'Intuition & Change',glow:'rgba(42,74,124,.6)',tint:'#2a4a7c',
-   text:['暗い石の表面に、角度によって青・緑・金の神秘的な光彩が現れる石。この独特の輝きは「ラブラドレッセンス」と呼ばれ、見る者を魅了してやみません。','カナダのラブラドル半島が原産地。直感と変容をもたらす石として知られ、秘めた才能と可能性を引き出すと言われています。眠っていた自分の輝きを、世界へひらかせてくれます。']},
-  {name:'ムーンストーン',img:'images/stones/moonstone.png',key:'Love & Sensitivity',glow:'rgba(176,200,224,.6)',tint:'#b0c8e0',
-   text:['表面に月光のような青い揺らぎを宿す、柔らかな光を持つ石。古代インドでは月の女神の涙が固まったと信じられ、旅人を守る聖なる石とされてきました。','主な産地はスリランカ。感受性と直感を高め、変化の波をやさしく乗りこなす力を与えると言われています。闇夜の中でも道を照らす月のように、あなたを導いてくれます。']},
-  {name:'ラピスラズリ',img:'images/stones/lapis-lazuli.png',key:'Truth & Wisdom',glow:'rgba(26,74,140,.6)',tint:'#1a4a8c',
-   text:['深い青の地に、金の星屑のようなパイライトが輝く石。古代エジプトではファラオの装飾に使われ、真実と知恵の象徴として5000年以上愛されてきました。','主な産地はアフガニスタン。知性と直感を高め、真実を語る勇気をもたらすと言われています。ありのままの自分を堂々と表現するための、深い青の盾です。']}
+  {name:'ルチルクォーツ',img:'images/stones/rutilated-quartz.png',key:'ー 光は願いを叶える力 ー',glow:'rgba(212,175,55,.6)',tint:'#d4af37',
+   text:'意志と行動力を高め、目標への道筋を照らすと言われています。望む未来へ迷わず進むための、金の羅針盤のような存在です。'},
+  {name:'アメジスト',img:'images/stones/amethyst.png',key:'ー 静寂の中で叡智の花ひらく ー',glow:'rgba(146,84,160,.6)',tint:'#9254a0',
+   text:'心の喧騒を静め、本来の直感を呼び覚ますと言われています。深い紫の中に、静かに叡智を宿す守護石です。'},
+  {name:'オパール',img:'images/stones/opal.png',key:'ー 夢は新たな色を纏い輝く ー',glow:'rgba(220,200,240,.6)',tint:'#e0c8e8',
+   text:'感性と創造力を高め、秘めた才能を引き出すと言われています。あなたの内側に宿る、七色の可能性を呼び覚ます石です。'},
+  {name:'オニキス',img:'images/stones/onyx.png',key:'ー 揺るがぬ意志が未来を創る ー',glow:'rgba(60,60,70,.6)',tint:'#1a1a22',
+   text:'揺らぐ意志を支え、外からの影響を退ける守護石として古来大切にされてきました。何があっても自分の軸を失わない、漆黒の盾のような存在です。'},
+  {name:'ガーネット',img:'images/stones/garnet.png',key:'ー 願いの種はやがて開花する ー',glow:'rgba(140,30,40,.6)',tint:'#8c1e28',
+   text:'情熱と忍耐をもたらし、地道な努力を実りへと導くと言われています。深紅の輝きが、あなたの中に眠る生命力をそっと呼び覚ます石です。'},
+  {name:'クンツァイト',img:'images/stones/kunzite.png',key:'ー 優しさは巡り愛となって還る ー',glow:'rgba(232,182,200,.6)',tint:'#e8b6c8',
+   text:'心を柔らかくほどき、無条件の愛と優しさをもたらすと言われています。淡いピンクの光に包まれて、与えた愛が静かに自分のもとへ還ってくる石です。'},
+  {name:'サファイア',img:'images/stones/sapphire.png',key:'ー 真実の光が進む道を照らす ー',glow:'rgba(15,82,150,.6)',tint:'#0f5296',
+   text:'誠実さと智慧をもたらし、迷いの中でも真実を見極める力を授けると言われています。深い青の輝きが、揺るがぬ信念を持って進むあなたの道を照らす石です。'},
+  {name:'スモーキークォーツ',img:'images/stones/smoky-quartz.png',key:'ー 大地の力はいつも貴方を支える ー',glow:'rgba(110,85,70,.6)',tint:'#6e5546',
+   text:'心の不安や緊張を鎮め、大地に深く根を張る力を与えてくれると言われています。どんな揺らぎの中でも、しっかりと足元を支えてくれる頼もしい石です。'},
+  {name:'タンザナイト',img:'images/stones/tanzanite.png',key:'ー 夜明けは新たな扉をひらく ー',glow:'rgba(82,70,140,.6)',tint:'#52468c',
+   text:'直感を高め、人生の転機にそっと寄り添う石として知られています。藍と紫が混ざり合う神秘の輝きが、夜明けへと向かうあなたを優しく導く石です。'},
+  {name:'ターコイズ',img:'images/stones/turquoise.png',key:'ー 追い風は旅立つ背中を押す ー',glow:'rgba(64,180,200,.6)',tint:'#40b4c8',
+   text:'古来「旅人の守護石」として大切にされ、新しい挑戦への一歩を支えると言われています。澄んだ空の色が、あなたの背中をそっと押してくれる石です。'},
+  {name:'ハウライト',img:'images/stones/howlite.png',key:'ー 静寂が心の声を聞かせてくれる ー',glow:'rgba(240,240,232,.6)',tint:'#f0f0e8',
+   text:'心のざわめきを鎮め、本当の自分の声に耳を澄ます力をもたらすと言われています。まっさらな白の中に、静かな気づきを宿す石です。'},
+  {name:'ムーンストーン',img:'images/stones/moonstone.png',key:'ー 月明かりは優しく道を示す ー',glow:'rgba(176,200,224,.6)',tint:'#b0c8e0',
+   text:'感受性と直感を高め、変化の波をやさしく乗りこなす力を与えると言われています。闇夜の中でも道を照らす月のように、あなたを導いてくれる石です。'},
+  {name:'ブラックスピネル',img:'images/stones/black-spinel.png',key:'ー 勇気ある一歩が世界を変えてゆく ー',glow:'rgba(40,40,55,.6)',tint:'#282837',
+   text:'ネガティブなエネルギーを払い、力強く前へ進む勇気を与えてくれると言われています。深い漆黒の輝きが、迷いを断ち切るあなたの一歩を後押しする石です。'},
+  {name:'ヘソナイト',img:'images/stones/hessonite.png',key:'ー 自らの力が豊かな実りを結ぶ ー',glow:'rgba(190,110,60,.6)',tint:'#be6e3c',
+   text:'情熱と粘り強さを高め、行動を確かな成果へと結ぶ力を授けると言われています。蜂蜜色の温かな光が、あなたの努力をやさしく実りへと変えていく石です。'},
+  {name:'マラカイト',img:'images/stones/malachite.png',key:'ー 新しい自分に生まれ変わる ー',glow:'rgba(40,120,80,.6)',tint:'#287850',
+   text:'心の奥にある古い感情を浄化し、変容と再生を促す石として知られています。深緑の縞模様が、新しい自分へと向かう道を静かに後押ししてくれる石です。'},
+  {name:'ラピスラズリ',img:'images/stones/lapis-lazuli.png',key:'ー 星々の導きはいつもそこにある ー',glow:'rgba(26,74,140,.6)',tint:'#1a4a8c',
+   text:'知性と直感を高め、真実を語る勇気をもたらすと言われています。ありのままの自分を堂々と表現するための、深い青の盾です。'},
+  {name:'ラブラドライト',img:'images/stones/labradorite.png',key:'ー 秘めた才能が目覚める ー',glow:'rgba(42,74,124,.6)',tint:'#2a4a7c',
+   text:'直感と変容をもたらす石として知られ、秘めた才能と可能性を引き出すと言われています。眠っていた自分の輝きを、世界へひらかせてくれる石です。'},
+  {name:'インカローズ',img:'images/stones/rhodochrosite.png',key:'ー 心は何度でも美しく咲き誇る ー',glow:'rgba(230,120,140,.6)',tint:'#e6788c',
+   text:'過去の傷を癒し、ふたたび愛を受け取る勇気をもたらすと言われています。薔薇色の輝きが、あなたの心に再び花を咲かせる石です。'},
+  {name:'アマゾナイト',img:'images/stones/amazonite.png',key:'ー 希望の風は自由な空へ誘う ー',glow:'rgba(120,200,190,.6)',tint:'#78c8be',
+   text:'心の迷いを払い、希望と勇気をもたらすと言われています。澄んだ水色の光が、自由な空へと羽ばたくあなたを優しく後押しする石です。'},
+  {name:'イエロータイガーアイ',img:'images/stones/yellow-tigers-eye.png',key:'ー 未来を掴む力が今目を覚ます ー',glow:'rgba(200,140,40,.6)',tint:'#c88c28',
+   text:'洞察力と決断力を高め、チャンスを的確に掴む力を授けると言われています。黄金色の煌めきが、未来を切り拓くあなたの瞳を鋭く澄ませる石です。'},
+  {name:'エレスチャルクォーツ',img:'images/stones/super-seven.png',key:'ー 魂と宇宙が共鳴し合う ー',glow:'rgba(140,90,160,.6)',tint:'#8c5aa0',
+   text:'7種類の鉱物が織りなす特別な石で、魂の成長と高次の気づきをもたらすと言われています。宇宙のリズムと響き合いながら、あなたの本質を深めていく石です。'},
+  {name:'エメラルド',img:'images/stones/emerald.png',key:'ー 愛と叡智が未来を照らす ー',glow:'rgba(50,140,90,.6)',tint:'#328c5a',
+   text:'古来「叡智と愛の石」として大切にされ、心の調和と豊かさをもたらすと言われています。深い緑の輝きが、愛ある選択であなたの未来を照らす石です。'},
+  {name:'グリーンアベンチュリン',img:'images/stones/green-aventurine.png',key:'ー 新しい可能性が芽吹く ー',glow:'rgba(110,170,120,.6)',tint:'#6eaa78',
+   text:'心を穏やかに整え、新しいチャンスを呼び込む石として知られています。若葉のような優しい緑が、あなたの中に眠る可能性をそっと芽吹かせる石です。'},
+  {name:'コッパールチルクォーツ',img:'images/stones/copper-rutilated-quartz.png',key:'ー 情熱は未来への道を拓いてゆく ー',glow:'rgba(180,90,60,.6)',tint:'#b45a3c',
+   text:'銅色のルチルが内側で燃えるように輝き、情熱と行動力を高めると言われています。秘めた熱を呼び覚まし、望む未来への道を切り拓く石です。'},
+  {name:'水晶',img:'images/stones/clear-quartz.png',key:'ー 澄んだ光が心を満たす ー',glow:'rgba(232,232,240,.6)',tint:'#e8e8f0',
+   text:'すべての石の基本とされ、エネルギーを浄化し本来の自分を取り戻す力をもたらすと言われています。透明な輝きが、心の隅々まで澄んだ光で満たす石です。'},
+  {name:'セレナイト',img:'images/stones/selenite.png',key:'ー 月光は魂をやさしく包み込む ー',glow:'rgba(240,236,228,.6)',tint:'#f0ece4',
+   text:'古代より「月の女神の石」と呼ばれ、心と空間を浄化する力を持つと言われています。月光のような柔らかな白い輝きが、魂をやさしく包み込む石です。'},
+  {name:'シトリン',img:'images/stones/citrine.png',key:'ー 豊かさが光となり巡り満ちる ー',glow:'rgba(232,184,60,.6)',tint:'#e8b83c',
+   text:'古来「商人の石」と呼ばれ、富と繁栄、明るいエネルギーを引き寄せると言われています。蜜のような黄金の輝きが、あなたの周りに豊かさを巡らせる石です。'},
+  {name:'サンストーン',img:'images/stones/sunstone.png',key:'ー 貴方だけの輝きが目覚める ー',glow:'rgba(224,136,80,.6)',tint:'#e08850',
+   text:'活力と自信を与え、前向きな気持ちを引き出すと言われています。あなたの中に眠る、太陽のような輝きと温かさを世界へ解き放ってくれます。'},
+  {name:'天眼石',img:'images/stones/tenganseki.png',key:'ー 守りの光が行先を照らす ー',glow:'rgba(70,55,45,.6)',tint:'#46372d',
+   text:'チベットで「神の眼」と崇められ、強い守護と魔除けの力を持つと言われています。眼のような模様が、あなたを見守りながら進むべき道を照らす石です。'},
+  {name:'ブラックオパール',img:'images/stones/black-opal.png',key:'ー 奇跡は芽吹きはじめる ー',glow:'rgba(60,50,90,.6)',tint:'#3c325a',
+   text:'黒い地の中に虹色の遊色を秘めた稀少な石で、隠された才能と幸運を呼び覚ますと言われています。闇夜に瞬く星のように、あなたの中に奇跡を芽吹かせる石です。'},
+  {name:'ダルメシアンジャスパー',img:'images/stones/dalmatian-jasper.png',key:'ー 自分らしさを取り戻す ー',glow:'rgba(220,210,200,.6)',tint:'#dcd2c8',
+   text:'心の余計な力みを抜き、自然体でいる勇気をもたらすと言われています。白と黒の斑模様が、ありのままのあなたへ静かに引き戻してくれる石です。'},
+  {name:'デンドリティックアゲート',img:'images/stones/dendritic-agate.png',key:'ー 小さな芽吹きは森となる ー',glow:'rgba(90,107,90,.5)',tint:'#6a7b6a',
+   text:'豊かさと繁栄を象徴する石として知られています。根を張り、着実に積み重ねていく力を与えてくれます。じっくりと育てていく毎日を、力強く支える石です。'},
+  {name:'トルマリンインクォーツ',img:'images/stones/tourmalinated-quartz.png',key:'ー 光と影は美しくひとつに結ばれる ー',glow:'rgba(110,110,120,.6)',tint:'#6e6e78',
+   text:'水晶の透明さの中に黒トルマリンの線が走り、浄化と統合の力を併せ持つと言われています。光と影が織りなす対比が、あなたの中の相反する自分をひとつに結ぶ石です。'},
+  {name:'ブラッドショットアイオライト',img:'images/stones/bloodshot-iolite.png',key:'ー 魂の炎は未来を照らす ー',glow:'rgba(90,70,150,.6)',tint:'#5a4696',
+   text:'青の中に赤の閃きを宿す稀少な石で、内なる情熱と直感を同時に高めると言われています。冷静さと熱を併せ持つ輝きが、魂の炎で未来を照らす石です。'},
+  {name:'アイオライト',img:'images/stones/iolite.png',key:'ー 胸の羅針盤は進む道を示す ー',glow:'rgba(85,90,160,.6)',tint:'#555aa0',
+   text:'古来「ヴァイキングのコンパス」と呼ばれ、進むべき方向を示す石として大切にされてきました。深い藍色の光が、迷う心に確かな道筋を示してくれる石です。'},
+  {name:'ピンクエピドート',img:'images/stones/pink-epidote.png',key:'ー 愛は静かに育ち花を咲かせる ー',glow:'rgba(220,140,150,.6)',tint:'#dc8c96',
+   text:'心をゆっくりと開き、穏やかな愛を育てる力をもたらすと言われています。優しいピンクの光が、急がず焦らず、愛を花へと育てていく石です。'},
+  {name:'ブルータイガーアイ',img:'images/stones/blue-tigers-eye.png',key:'ー 澄んだ瞳は未来の風を読む ー',glow:'rgba(50,80,110,.6)',tint:'#32506e',
+   text:'冷静な判断力と洞察力を授け、本質を見抜く力を高めると言われています。深い藍の煌めきが、騒がしさの中でも未来の風を読み取る瞳をくれる石です。'},
+  {name:'マザーオブパール',img:'images/stones/mother-of-pearl.png',key:'ー 無償の愛に包まれる ー',glow:'rgba(240,232,232,.6)',tint:'#f0e8e8',
+   text:'真珠の母貝から生まれ、母性と無条件の愛を象徴する石として大切にされてきました。柔らかな虹色の輝きが、まっすぐに包み込む愛をあなたへ届ける石です。'},
+  {name:'ハーキマーダイヤモンド',img:'images/stones/herkimer-diamond.png',key:'ー 願いは星空を越えて届く ー',glow:'rgba(220,228,240,.6)',tint:'#d8dde5',
+   text:'エネルギーを純化・増幅する力を持つと言われ、意識を澄み渡らせてくれます。曇りのない本来の自分を映し出す、鏡のような石です。'},
+  {name:'モスアゲート',img:'images/stones/moss-agate.png',key:'ー 育てた想いが実りへ変わる ー',glow:'rgba(74,124,89,.55)',tint:'#4a7c59',
+   text:'大地のエネルギーを宿し、成長と癒しをもたらすと言われています。あなたのペースで、自然体のまま豊かに育っていけるよう、静かに支えてくれます。'},
+  {name:'ピンクオパール',img:'images/stones/pink-opal.png',key:'ー 愛が心に満ちてゆく ー',glow:'rgba(240,200,210,.6)',tint:'#f0c8d2',
+   text:'傷ついた心を癒し、自分自身を慈しむ力をやさしく取り戻すと言われています。淡いピンクの光が、あなたの内側に静かに愛を満たしていく石です。'},
+  {name:'フローライト',img:'images/stones/fluorite.png',key:'ー 思考は自由な空へ羽ばたいてゆく ー',glow:'rgba(160,200,210,.55)',tint:'#a8c0d0',
+   text:'思考を整え、集中力と明晰さをもたらす石として知られています。心の雑念を静かに払い、本当に大切なことへ意識を向けるサポートをしてくれます。'},
+  {name:'マイカインクォーツ',img:'images/stones/mica-in-quartz.png',key:'ー 内なる光は静かに輝きを増す ー',glow:'rgba(220,210,200,.6)',tint:'#dcd2c8',
+   text:'水晶の中にマイカ（雲母）の煌めきを宿し、内側からの輝きを引き出すと言われています。星屑のような瞬きが、あなたの本来の光を静かに照らし出す石です。'},
+  {name:'レッドジャスパー',img:'images/stones/red-jasper.png',key:'ー 貴方の一歩に力が宿る ー',glow:'rgba(170,60,50,.6)',tint:'#aa3c32',
+   text:'古来「戦士の石」と呼ばれ、勇気と持久力をもたらすと言われています。深紅の力強い輝きが、踏み出す一歩一歩に確かな力を宿す石です。'},
+  {name:'ローズクォーツ',img:'images/stones/rose-quartz.png',key:'ー 愛は貴方を美しくする ー',glow:'rgba(240,180,190,.6)',tint:'#f0b4be',
+   text:'自己愛と無条件の愛を呼び覚ます「愛の石」として古来大切にされてきました。淡いピンクの光が、内側から滲み出る美しさをあなたに引き出す石です。'},
+  {name:'ホワイトラブラドライト',img:'images/stones/rainbow-moonstone.png',key:'ー 月虹は新たな未来を照らし出す ー',glow:'rgba(220,224,240,.6)',tint:'#dce0f0',
+   text:'白い地の中に虹色のシラーを宿し、新しい始まりと癒しをもたらすと言われています。月に架かる虹のような輝きが、まだ見ぬ未来へとあなたを導く石です。'}
 ];
 
+/* ---------- Stone grid build ---------- */
+var COLLAPSED_COUNT=10;
+var isExpanded=false;
 var grid=document.getElementById('stoneGrid');
+var stoneCount=document.getElementById('stoneCount');
+var moreWrap=document.getElementById('stoneMore');
+var moreBtn=document.getElementById('stoneMoreBtn');
 stones.forEach(function(s,i){
   var d=document.createElement('div');
   d.className='stone';
+  if(i>=COLLAPSED_COUNT)d.classList.add('beyond-fold');
+  d.dataset.idx=i;
+  d.dataset.name=s.name;
   d.style.setProperty('--orb-glow',s.glow);
-  d.innerHTML='<div class="stone-orb" style="--orb-glow:'+s.glow+'"><img src="'+s.img+'" alt="'+s.name+'"></div><div class="stone-name">'+s.name+'</div>';
+  d.innerHTML='<div class="stone-orb" style="--orb-glow:'+s.glow+';--orb-bg:'+s.tint+'"><img src="'+s.img+'" alt="'+s.name+'" onerror="this.style.display=\'none\'"></div><div class="stone-name">'+s.name+'</div>';
   d.onclick=function(){openModal(i)};
   grid.appendChild(d);
+});
+stoneCount.textContent=stones.length+' stones';
+
+moreBtn.addEventListener('click',function(){
+  isExpanded=!isExpanded;
+  if(isExpanded){
+    grid.classList.remove('collapsed');
+    moreBtn.textContent='閉じる';
+  }else{
+    grid.classList.add('collapsed');
+    moreBtn.textContent='もっと見る';
+    document.getElementById('stones').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+});
+
+/* ---------- Search ---------- */
+var searchInput=document.getElementById('stoneSearch');
+var noResult=document.getElementById('stoneNoResult');
+searchInput.addEventListener('input',function(){
+  var q=this.value.trim().toLowerCase();
+  var allStones=grid.querySelectorAll('.stone');
+  if(q===''){
+    /* Restore collapsed/expanded state when search is cleared */
+    if(!isExpanded)grid.classList.add('collapsed');
+    moreWrap.classList.remove('hide');
+    allStones.forEach(function(el){el.classList.remove('hidden')});
+    noResult.classList.remove('show');
+    stoneCount.style.display='';
+    stoneCount.textContent=stones.length+' stones';
+    return;
+  }
+  /* Searching: ignore collapse, show only matches */
+  grid.classList.remove('collapsed');
+  moreWrap.classList.add('hide');
+  var visibleCount=0;
+  allStones.forEach(function(el){
+    var name=el.dataset.name.toLowerCase();
+    if(name.indexOf(q)>=0){
+      el.classList.remove('hidden');
+      visibleCount++;
+    }else{
+      el.classList.add('hidden');
+    }
+  });
+  if(visibleCount===0){
+    noResult.classList.add('show');
+    stoneCount.style.display='none';
+  }else{
+    noResult.classList.remove('show');
+    stoneCount.style.display='';
+    stoneCount.textContent=visibleCount+' stones';
+  }
 });
 
 /* ---------- Stone Modal ---------- */
 var modal=document.getElementById('modal');
 function openModal(i){
   var s=stones[i];
-  document.getElementById('dOrb').style.setProperty('--orb-glow',s.glow);
-  document.getElementById('dImg').src=s.img;
-  document.getElementById('dImg').alt=s.name;
+  var dOrb=document.getElementById('dOrb');
+  dOrb.style.setProperty('--orb-glow',s.glow);
+  dOrb.style.setProperty('--orb-bg',s.tint);
+  var dImg=document.getElementById('dImg');
+  dImg.style.display='';
+  dImg.onerror=function(){this.style.display='none';};
+  dImg.src=s.img;
+  dImg.alt=s.name;
   document.getElementById('dName').textContent=s.name;
   document.getElementById('dKey').textContent=s.key;
-  document.getElementById('dText').innerHTML='<p>'+s.text[0]+'</p><p>'+s.text[1]+'</p>';
+  document.getElementById('dText').innerHTML='<p>'+s.text+'</p>';
   modal.classList.add('open');
   var tint=document.getElementById('tint');
   tint.style.background='radial-gradient(circle at 50% 40%,'+s.tint+',transparent 70%)';
